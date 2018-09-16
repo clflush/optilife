@@ -276,6 +276,8 @@
 	  collect tag)))
 
 (untrace)
-(life-scan :cycles 25 :b/s-vec-len 2) ;; >10 runs the whole thing!
-(mapcar #'pprint *results*)
-;(test-life)
+(life-scan :cycles 25 :b/s-vec-len 4) ;; >10 runs the whole thing!
+(with-open-file
+ (o (print (format nil "~a.results" (get-universal-time)))
+    :direction :output)
+ (loop for r in *results* do (pprint r o)))
